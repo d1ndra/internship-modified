@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>Search</title>
+<script>  
+ var app = angular.module('user', []);  
+ app.controller('ctrlName', function($scope) {  
+  $scope.names = ['Flipkart','Amazon','SAP','Oracle','Panasonic','HP','Apple','Test','Sample'];  
+ });  
+   </script>
+   </head>
+<body style="text-align:center;">
+ <h1>Search</h1>
+    <form>
+    <table id="abc" style="width:100%">
+    <tr>
+    <td>
+    </td>
+    <td>
+   <div class="sample" ng-controller="ctrlName">
+Client/Account Name:  
+  <select ng-model="name" ng-multiple="true">
+            <option></option>
+             <option>Flipkart</option>
+             <option>Amazon</option>
+             <option>SAP</option>
+             <option>Oracle</option>
+             <option>Panasonic</option>
+             <option>HP</option>
+             <option>Apple</option>
+             <option>Test</option>
+             <option>Sample</option>
+         </select>   
+   </div>
+   </td>
+    <td>
+    <input type="radio" name="Active" ng-model="active" value="active" checked>Active
+    <input type="radio" name="Active" ng-model="active" value="inactive">Inactive
+    <br>
+    <br>
+    </td>
+    </select>
+    </tr>
+    <tr>
+    <br>
+    <br>
+    </tr>
+    <tr>
+    <td>
+    Hosting type:
+    <br>
+    <br>
+    </td>
+    <td>
+    <input type="radio" name="Type" ng-model="type" value="On-Prem">On-Prem
+    <input type="radio" name="Type" ng-model="type" value="SaaS">SaaS
+    <br>
+    <br>
+    </td>
+    <td>
+    Industry:
+    <br>
+    <br>
+    </td>
+    <td>
+    <select ng-model="industry">
+      <option></option>
+      <option>A</option>
+      <option>B</option>
+    </select>
+    <br>
+    <br>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Geography/IOT/GMU:
+    <br>
+    <br>
+    </td>
+    <td>
+    <select ng-model="geography">
+      <option></option>
+      <option>A</option>
+      <option>B</option>
+    </select>
+    <br>
+    <br>
+    </td>
+    <td>
+    Region/IMT/GMT:
+    <br>
+    <br>
+    </td>
+    <td>
+    <select ng-model="region">
+      <option></option>
+      <option>A</option>
+      <option>B</option>
+    </select>
+    <br>
+    <br>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Location:
+    <br>
+    <br>
+    </td>
+    <td>
+    <input type="text" name="location" size="20">
+    <br>
+    <br>
+    </td>
+    <td>
+    EDI Standards used:
+    <br>
+    <br>
+    </td>
+    <td>
+    <select ng-model="edi ">
+      <option></option>
+      <option>A</option>
+      <option>B</option>
+    </select>
+    <br>
+    <br>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Lifecycle of the Client:
+    </td>
+    <td>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="implementation">Implementation
+    <br>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="migration">Migration
+    <br>
+    From<input type="date" />
+    To<input type="date" />
+    <br>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="product enhancement/support">Product Enhancement/Support
+    </td>
+    <td>
+    ICN #:
+    </td>
+    <td>
+    <input type="text" name="icn" size="20">
+    </td>
+    </tr>
+    </table>
+    <br>
+    <br>
+    <button type="button" name="go">Go</button>
+    </form>
+    <br>
+    <button type="button" onclick="location.href = 'adminstart.html';">Back</button>
+    
+  </body>
+
+</html>

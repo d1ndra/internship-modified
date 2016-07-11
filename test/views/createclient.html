@@ -1,0 +1,123 @@
+<html>
+<title>Create Client</title>
+<body style="text-align:center;" ng-app="myApp">
+<div ng-controller="myCtrl">
+<h1>Create Client</h1>
+<form method="POST" action="/users/index">
+<br>
+<br>
+<table style="width:100%; margin:1em">
+	<tr>
+		<td>
+		</td>
+		<td>
+			<font color="red">Client/Account Name:</font>  
+			<input name="name" size="30"></input>
+			<br>
+			<br>
+		</td>
+		<td>
+		    <input type="radio" name="active" value="active" checked>Active
+		    <input type="radio" name="active" value="inactive">Inactive
+		    <br>
+		    <br>
+	    </td>
+	 </tr>
+	 <tr>
+	 <td/>
+	 <td>
+	<font color="red">Hosting Type:</font>  
+	<input type="radio" name="hostingtype" value="onpremise">On-Prem
+	<input type="radio" name="hostingtype" value="saas"> SaaS
+	<br>
+	<br>
+	</td>
+	</tr>
+	<tr>
+		<td>Industry:  <br></td>
+		<td><select name="industry">
+		<option></option>
+			<option value="Test1">Test1  </option>
+			<option value="Test2">Test2  </option>
+		</select><br></td>
+		<td><font color="red">Back-end System:  </font><br></td>
+		<td><select name="backend">
+		<option></option>
+			<option value="Test3">Test1  </option>
+			<option value="Test4">Test2  </option>
+		</select><br></td>
+	</tr>
+	<tr>
+		<td>Geography/IOT/GMU:  <br></td>
+		<td><select name="geography">
+		<option></option>
+			<option value="Test5">Test1  </option>
+			<option value="Test6">Test2  </option>
+		</select><br></td>
+	</tr>
+	<tr>
+		<td>Region/IMT/GMT:  <br></td>
+		<td><select name="region">
+		<option></option>
+			<option value="Test7">Test1  </option>
+			<option value="Test8">Test2  </option>
+		</select><br></td>
+		<td><font color="red">EDI Standards Used:  </font><br></td>
+		<td><select name="edi">
+		<option></option>
+			<option value="Test9">Test1  </option>
+			<option value="Test10">Test2  </option>
+		</select><br></td>
+	</tr>
+	<tr>
+		<td><font color="red">Location:  </font><br></td>
+		<td><input name="location" size=30><br></td>
+		<td>URL for Solution Manual:  <br></td>
+		<td><input name="solution" size=30><br></td>
+	</tr>
+	<tr>
+		<td><br></td>
+		<td><br></td>
+		<td>Link in RTC (if available)  <br></td>
+		<td><input name="rtc" size=30><br></td>
+	</tr>
+	<tr>
+    <td>
+    Lifecycle of the Client:
+    </td>
+    <td>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="implementation">Implementation
+    <br>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="migration">Migration
+    <br>
+    From<input name="fromdate" type="date" />
+    To<input name="todate" type="date" />
+    <br>
+    <input type="radio" name="lifecycle" ng-model="lifecycle" value="product enhancement/support">Product Enhancement/Support
+    </td>
+    <td>Third Party systems involved  </td>
+    <td><select name="thirdparty">
+    <option></option>
+    	<option value="Test7">Test14  </option>
+		<option value="Test8">Test15  </option>
+		</select><br></td>
+	</tr>
+	<tr>
+    <td>
+    ICN #:
+    </td>
+    <td>
+    <input name="icn" type="text" name="icn" size="20">
+    </td>
+    </tr>
+</table>
+
+<input type="submit" name="Submit" value="Create" ng-click="submit()">
+<button type="button" onclick="location.href = 'createclient.html';">Reset</button>
+<br>
+<br>
+<button type="button" onclick="location.href = 'adminstart.html';">Back</button>
+</form>
+</div>
+</body>
+</html>
