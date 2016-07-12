@@ -55,7 +55,7 @@ router.addClient = function(req, res) {
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('Success: ' + JSON.stringify(client));
-                res.render('adminstart');
+                res.redirect('/admin');
             }
         });
     });
@@ -82,9 +82,16 @@ router.get('/posts', function(req, res, next) {
 });
 
 
-*/router.get('/user', function(req, res, next) {
+*/
+router.get('/user', function(req, res, next) {
   res.render('user');
 });
+
+router.get('/user', function(req, res, next) {
+  res.render('user');
+});
+
+
 module.exports = router;
 
 

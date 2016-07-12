@@ -3,7 +3,7 @@
 <body style="text-align:center;" ng-app="myApp">
 <div ng-controller="myCtrl">
 <h1>Create Client</h1>
-<form method="POST" action="/users/index">
+<form method="POST" action="/admin/addclient">
 <br>
 <br>
 <table style="width:100%; margin:1em">
@@ -113,10 +113,10 @@
 </table>
 
 <input type="submit" name="Submit" value="Create" ng-click="submit()">
-<button type="button" onclick="location.href = 'createclient.html';">Reset</button>
+<button type="button" onclick="location.href = '/admin/createclient';">Reset</button>
 <br>
 <br>
-<button type="button" onclick="location.href = 'adminstart.html';">Back</button>
+<button type="button" onclick="location.href = '/admin';">Back</button>
 </form>
 </div>
 </body>
