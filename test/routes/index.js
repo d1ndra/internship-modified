@@ -29,7 +29,7 @@ db.open(function(err, db) {
     }
 });
 
-var clientdb = mongoose.model('Post');
+//var clientdb = mongoose.model('Post');
 // var active = mongoose.model('active');
 // var hostingtype=mongoose.model('hostingtype');
 // var industry=mongoose.model('industry');
@@ -55,13 +55,21 @@ router.addClient = function(req, res) {
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('Success: ' + JSON.stringify(client));
-                res.redirect('/admin');
+                res.render('adminstart');
             }
         });
     });
 }
 
-
+exports.searchClient = function(req, res) {
+    var name = req.params.name;
+    console.log('Retrieving client: ' + name);
+    db.collection('index', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+            res.send(client);
+        });
+    });
+};
 
 /*router.post('/posts', function(req, res, next) {
   var name = new name(req.body);
@@ -82,16 +90,9 @@ router.get('/posts', function(req, res, next) {
 });
 
 
-*/
-router.get('/user', function(req, res, next) {
+*/router.get('/user', function(req, res, next) {
   res.render('user');
 });
-
-router.get('/user', function(req, res, next) {
-  res.render('user');
-});
-
-
 module.exports = router;
 
 
@@ -99,7 +100,7 @@ var populateDB = function() {
 
     var clients = [
     {
-        name: "CHATEAU DE SAINT COSME",
+        name: "Client_sample",
         active : "active",
         hostingtype:"hostingtype",
         industry:"industry",
