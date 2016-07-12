@@ -8,7 +8,7 @@ require('./models/posts');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/news');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users');
 var admins = require('./routes/admin');
 var app = express();
 
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
 
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users);
 app.use('/admin', admins);
 // app.get('/user', function(req, res)
 //   {
