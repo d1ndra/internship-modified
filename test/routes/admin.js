@@ -11,15 +11,20 @@ router.get('/createclient', function(req, res) {
     res.render('createclient');
 });
 
-router.post('/createclient', client.addClient);
+router.post('/addclient', client.addClient);
 
 router.get('/search', function(req, res) {
     res.render('adminsearch');
 });
 
+router.post('/searchclient', client.searchClient);
+router.post('/searchclientadmin', client.searchClientAdmin);
+
 router.get('/updateclient', function(req, res) {
     res.render('updateclient');
 });
+
+router.post('/updateclient',client.updateClient);
 
 router.get('/editmaster', function(req, res) {
     res.render('master_data');
