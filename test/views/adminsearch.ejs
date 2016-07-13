@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Search</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>  
 <script>  
  var app = angular.module('user', []);  
  app.controller('ctrlName', function($scope) {  
@@ -10,7 +11,7 @@
    </head>
 <body style="text-align:center;">
  <h1>Search</h1>
-    <form>
+    <form method="POST" action="/admin/searchclientadmin">
     <table id="abc" style="width:100%">
     <tr>
     <td>
@@ -18,23 +19,23 @@
     <td>
    <div class="sample" ng-controller="ctrlName">
 Client/Account Name:  
-  <select ng-model="name" ng-multiple="true">
-            <option></option>
-             <option>Flipkart</option>
-             <option>Amazon</option>
-             <option>SAP</option>
-             <option>Oracle</option>
-             <option>Panasonic</option>
-             <option>HP</option>
-             <option>Apple</option>
-             <option>Test</option>
-             <option>Sample</option>
+  <select name="name" ng-multiple="true">
+            <option value=""></option>
+             <option value="Flipkart">Flipkart</option>
+             <option value="Amazon">Amazon</option>
+             <option value="SAP">SAP</option>
+             <option value="Oracle">Oracle</option>
+             <option value="Panasonic">Panasonic</option>
+             <option value="HP">HP</option>
+             <option value="Apple">Apple</option>
+             <option value="Test">Test</option>
+             <option value="Sample">Sample</option>
          </select>   
    </div>
    </td>
     <td>
-    <input type="radio" name="Active" ng-model="active" value="active" checked>Active
-    <input type="radio" name="Active" ng-model="active" value="inactive">Inactive
+    <input type="radio" name="Active" value="active">Active
+    <input type="radio" name="Active" value="inactive">Inactive
     <br>
     <br>
     </td>
@@ -51,8 +52,8 @@ Client/Account Name:
     <br>
     </td>
     <td>
-    <input type="radio" name="Type" ng-model="type" value="On-Prem">On-Prem
-    <input type="radio" name="Type" ng-model="type" value="SaaS">SaaS
+    <input type="radio" name="hostingtype" value="onpremise">On-Prem
+    <input type="radio" name="hostingtype" value="saas">SaaS
     <br>
     <br>
     </td>
@@ -62,10 +63,10 @@ Client/Account Name:
     <br>
     </td>
     <td>
-    <select ng-model="industry">
-      <option></option>
-      <option>A</option>
-      <option>B</option>
+    <select name="industry">
+      <option value=""></option>
+      <option value="A">A</option>
+      <option value=""B>B</option>
     </select>
     <br>
     <br>
@@ -78,10 +79,10 @@ Client/Account Name:
     <br>
     </td>
     <td>
-    <select ng-model="geography">
-      <option></option>
-      <option>A</option>
-      <option>B</option>
+    <select name="geography">
+      <option value=""></option>
+      <option value="A">A</option>
+      <option value="B">B</option>
     </select>
     <br>
     <br>
@@ -92,10 +93,10 @@ Client/Account Name:
     <br>
     </td>
     <td>
-    <select ng-model="region">
-      <option></option>
-      <option>A</option>
-      <option>B</option>
+    <select name="region">
+      <option value=""></option>
+      <option value="A">A</option>
+      <option value="B">B</option>
     </select>
     <br>
     <br>
@@ -118,10 +119,10 @@ Client/Account Name:
     <br>
     </td>
     <td>
-    <select ng-model="edi ">
-      <option></option>
-      <option>A</option>
-      <option>B</option>
+    <select name="edi">
+      <option value=""></option>
+      <option value="A">A</option>
+      <option value="B">B</option>
     </select>
     <br>
     <br>
@@ -132,14 +133,14 @@ Client/Account Name:
     Lifecycle of the Client:
     </td>
     <td>
-    <input type="radio" name="lifecycle" ng-model="lifecycle" value="implementation">Implementation
+    <input type="radio" name="lifecycle" value="implementation">Implementation
     <br>
-    <input type="radio" name="lifecycle" ng-model="lifecycle" value="migration">Migration
+    <input type="radio" name="lifecycle" value="migration">Migration
     <br>
-    From<input type="date" />
-    To<input type="date" />
+    From<input type="date" name="fromdate" />
+    To<input type="date" name="todate" />
     <br>
-    <input type="radio" name="lifecycle" ng-model="lifecycle" value="product enhancement/support">Product Enhancement/Support
+    <input type="radio" name="lifecycle" value="product enhancement/support">Product Enhancement/Support
     </td>
     <td>
     ICN #:
@@ -151,7 +152,7 @@ Client/Account Name:
     </table>
     <br>
     <br>
-    <button type="button" name="go">Go</button>
+    <button type="submit" ng-click="submit()">Go</button>
     </form>
     <br>
     <button type="button" onclick="location.href = '/admin';">Back</button>
