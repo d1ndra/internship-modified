@@ -3,30 +3,44 @@
 </head>
 <body>
 <table> 
-<tr>Client/Account Name</tr>
-{{info.name}}
-<tr>ICN #</tr>
-{{info.icn}}
-<tr>Hosting Type</tr>
-{{info.hostingtype}}
-<tr>Industry</tr>
-{{info.industry}}
-<tr>Geography/IOT/GMU</tr>
-{{info.geography}}
-<tr>Region/IMT/GMT</tr>
-{{info.region}}
-<tr>Location</tr>
-{{info.location}}
-<tr>EDI Standards Used</tr>
-{{info.edi}}
-<tr>Lifecycle of the client</tr>
-{{info.lifecycle}}
-<tr>Link to Solution Manual</tr>
-{{info.solution}}
-<tr>Link in RTC</tr>
-{{info.rtc}}
-<tr>Third Party Systems Involved</tr>
-{{info.thirdparty}}
+<tr>
+<td>Client/ Account Name</td>
+<td>Active</td>
+<td>ICN #</td>
+<td>Hosting Type</td>
+<td>Industry</td>
+<td>Backend</td>
+<td>Geography/ IOT/ GMU</td>
+<td>Region/ IMT/ GMT</td>
+<td>Location</td>
+<td>EDI Standards Used</td>
+<td>Lifecycle of the client</td>
+<td>From</td>
+<td>To</td>
+<td>Link to Solution Manual</td>
+<td>Link in RTC</td>
+<td>Third Party Systems Involved</td>
+</tr>
+<% for(var i=0;i<info.length;i++) { %>
+<tr>
+<td><%=info[i].name%></td>
+<td><%=info[i].active%></td>
+<td><%=info[i].icn%></td>
+<td><%=info[i].hostingtype%></td>
+<td><%=info[i].industry%></td>
+<td><%=info[i].backend%></td>
+<td><%=info[i].geography%></td>
+<td><%=info[i].region%></td>
+<td><%=info[i].location%></td>
+<td><%=info[i].edi%></td>
+<td><%=info[i].lifecycle%></td>
+<td><%=info[i].fromdate%></td>
+<td><%=info[i].todate%></td>
+<td><%=info[i].solution%></td>
+<td><%=info[i].rtc%></td>
+<td><%=info[i].thirdparty%></td>
+</tr>
+<% } %>
 </table>
 </body>
 </html>
