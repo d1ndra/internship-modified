@@ -1,4 +1,6 @@
 var express = require('express');
+var pdf = require('html-pdf');
+var fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
@@ -46,11 +48,26 @@ router.addClient = function(req, res) {
     }
     else
     {
-      console.log("in else");
-    }
-  }
-    /*else
-    {
+        if(req.body.name == "")
+        {
+          res.send('Client Name is mandatory!');
+        }
+        if(req.body.hostingtype !== "onpremise" || req.body.hostingtype !== "saas")
+        {
+          res.send('Hosting Type is mandatory!');
+        }
+        if(req.body.backend == "")
+        {
+          res.send('Backend System is mandatory!');
+        }
+        if(req.body.edi == "")
+        {
+          res.send('EDI standards used is mandatory!');
+        }
+        if(req.body.location == "")
+        {
+          res.send('Location is mandatory!');
+        }
         console.log('Adding client: ' + JSON.stringify(client));
         db.collection('clients', function(err, collection) {
             collection.insert(client, {safe:true}, function(err, result) {
@@ -63,7 +80,7 @@ router.addClient = function(req, res) {
             });
         });
     }
-  }*/
+  }
 
 function check(clname)
 {
@@ -166,22 +183,29 @@ router.searchClient = function(req, res) {
         console.log(err);
       } else if (result.length) {
         console.log('Found:', result);
+        topdf(req,result);
         //res.json(result);
-        var pdf = require('html-pdf');
          var options = {format: 'Letter'};
-        router.Topdf = function (req, res) {
-         var info = result;
+        function topdf(rq, rs) {
+          console.log("inside;");
+         var info = rs;
         res.render('template', {
             info: info,
         }, function (err, HTML) {
+          console.log(info);
             pdf.create(HTML, options).toFile('./downloads/employee.pdf', function (err, result) {
+              console.log(HTML);
                 if (err) {
                     return res.status(400).send({
                         message: errorHandler.getErrorMessage(err)
                     });
                 }
-            })
-          })
+            });
+            fs.readFile('./downloads/employee.pdf',function(err,data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
+          });
  }
       } else {
         console.log('No document(s) found with defined "find" criteria!');
