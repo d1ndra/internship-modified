@@ -37,21 +37,19 @@ db.open(function(err, db) {
 
 router.addClient = function(req, res) {
     var client = req.body;
-    if(collection.find({name : req.body.name}).toArray(function (err, result) {
-          if (err) {
-            console.log(err);
-          } else if (result.length) {
-            return true;
-          } else {
-            return false;
-          }
-        })
-      )
+    var name = req.body.name;
+    
+    if(check(name))
     {
       res.send('Client already exists!');
       res.render('adminstart');
     }
     else
+    {
+      console.log("in else");
+    }
+  }
+    /*else
     {
         console.log('Adding client: ' + JSON.stringify(client));
         db.collection('clients', function(err, collection) {
@@ -65,7 +63,23 @@ router.addClient = function(req, res) {
             });
         });
     }
-  }
+  }*/
+
+function check(clname)
+{
+collection.find({name : clname}).toArray(function (err, result) {
+          if (err) {
+            console.log(err);
+          } else if (result.length) {
+            console.log("true");
+            return true;
+          } else {
+            console.log("false");
+            return false;
+          }
+        });
+}
+
 
 router.updateClient = function(req, res) {
     var client = req.body;
@@ -152,7 +166,23 @@ router.searchClient = function(req, res) {
         console.log(err);
       } else if (result.length) {
         console.log('Found:', result);
-        res.json(result);
+        //res.json(result);
+        var pdf = require('html-pdf');
+         var options = {format: 'Letter'};
+        router.Topdf = function (req, res) {
+         var info = result;
+        res.render('template', {
+            info: info,
+        }, function (err, HTML) {
+            pdf.create(HTML, options).toFile('./downloads/employee.pdf', function (err, result) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                }
+            })
+          })
+ }
       } else {
         console.log('No document(s) found with defined "find" criteria!');
         res.render('failsearch')
