@@ -1,34 +1,40 @@
-<html>
+<html ng-app="test">
 <title>Search</title>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>  
-   <script>  
+  <!-- <script>  
  var app = angular.module('user', []);  
  app.controller('ctrlName', function($scope) {  
   $scope.names = ['Flipkart','Amazon','SAP','Oracle','Panasonic','HP','Apple','Test','Sample'];  
  });  
+   </script>-->
+   <script type="text/javascript">
+       angular.module('test', []).controller('DemoCtrl', function ($scope, $http) {
+    $scope.selectedTestAccount = null;
+    $scope.clients = [];
+
+    $http({
+            method: 'GET',
+            url: '/admin/getclients',
+            data: { applicationId: 3 }
+        }).success(function (result) {
+        $scope.clients = result;
+    });
+});
+
    </script>
-    <body ng-app="user" style="text-align:center;"> 
+    <body ng-app="user" style="text-align:center;" ng-controller="DemoCtrl"> 
  <h1>Search</h1>
     <form method="POST" action="/admin/searchclient">
     <table id="abc" style="width:100%">
     <tr>
     <td/>
     <td>
-    <div class="sample" ng-controller="ctrlName">
+    <!--<div class="sample" ng-controller="ctrlName">-->
     Client/Account Name:       
-     <select name="name" ng-multiple="true">
-            <option value=""></option>
-             <option value="Flipkart">Flipkart</option>
-             <option value="Amazon">Amazon</option>
-             <option value="SAP">SAP</option>
-             <option value="Oracle">Oracle</option>
-             <option value="Panasonic">Panasonic</option>
-             <option value="HP">HP</option>
-             <option value="Apple">Apple</option>
-             <option value="Test">Test</option>
-             <option value="Sample">Sample</option>
-         </select> 
-    </div>   
+    <select name="selectedTestAccount" ng-model="selectedTestAccount">
+         <option ng:repeat="client in clients" value="{{client.name}}">{{client.name}}</option>
+     </select>  
+    <!--</div>   -->
     </td>
     <td>
     <input type="radio" name="Active" value="active">Active
