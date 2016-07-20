@@ -30,5 +30,26 @@ router.get('/editmaster', function(req, res) {
     res.render('master_data');
 });
 
+var mongo = require('mongodb');
+var Server = mongo.Server,
+    Db = mongo.Db,
+    BSON = mongo.BSONPure;
+var server = new Server('localhost', 27017, {auto_reconnect: true});
+db = new Db('clientdb', server);
+var collection = db.collection('clients');
+router.get('/getclients', function(req, res) {
+	//router.getclients = function(req,res) {
+  collection.find({}).toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if (result.length) {
+        //console.log('Found:', result);
+        res.json(result.name);
+      } else {
+        console.log('No document(s) found with defined "find" criteria!');
+        //res.render('failsearchadmin')
+      }
+  });
+});
 
 module.exports = router;
