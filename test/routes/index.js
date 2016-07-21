@@ -38,17 +38,28 @@ db.open(function(err, db) {
 });
 var collection = db.collection('clients');
 
-router.getclients = function(req,res) {
-  collection.find({}).toArray(function (err, result) {
-      if (err) {
-        console.log(err);
-      } else if (result.length) {
-        //console.log('Found:', result);
-        res.json(result.name);
-      } else {
-        console.log('No document(s) found with defined "find" criteria!');
-        //res.render('failsearchadmin')
-      }
+router.get( '/content', function ( require, response ) {
+    response.setHeader('Content-Type', 'application/json');
+    response.json( readJSON( function ( err, json ) {
+            if ( err ) {
+                throw err;
+            }
+            console.log( json );
+        } )
+    )
+} );
+
+function readJSON( callback ) {
+  collection.find({}).toArray(function (err, data) {
+      if ( err ) {
+            callback( err );
+            return;
+        }
+        try {
+            callback( null, JSON.parse( data ) );
+        } catch ( exception ) {
+            callback( exception );
+        }
   });
 }
 
