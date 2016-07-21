@@ -44,12 +44,12 @@ router.get('/getclients', function(req, res) {
         console.log(err);
       } else if (result.length) {
         //console.log('Found:', result);
-        res.json(result.name);
+        res.json(result);
       } else {
         console.log('No document(s) found with defined "find" criteria!');
         //res.render('failsearchadmin')
       }
   });
-});
+});	
 
 module.exports = router;
