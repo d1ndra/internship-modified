@@ -36,38 +36,36 @@ db.open(function(err, db) {
         });
     }
 });
+var collection = db.collection('clients');
+
+router.getclients = function(req,res) {
+  collection.find({}).toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if (result.length) {
+        //console.log('Found:', result);
+        res.json(result.name);
+      } else {
+        console.log('No document(s) found with defined "find" criteria!');
+        //res.render('failsearchadmin')
+      }
+  });
+}
 
 router.addClient = function(req, res) {
     var client = req.body;
     var name = req.body.name;
-    
-    if(check(name))
-    {
-      res.send('Client already exists!');
-      res.render('adminstart');
-    }
-    else
-    {
-        if(req.body.name == "")
-        {
-          res.send('Client Name is mandatory!');
-        }
-        if(req.body.hostingtype !== "onpremise" || req.body.hostingtype !== "saas")
-        {
-          res.send('Hosting Type is mandatory!');
-        }
-        if(req.body.backend == "")
-        {
-          res.send('Backend System is mandatory!');
-        }
-        if(req.body.edi == "")
-        {
-          res.send('EDI standards used is mandatory!');
-        }
-        if(req.body.location == "")
-        {
-          res.send('Location is mandatory!');
-        }
+    var status;
+    check(name,function(s){
+      status = s;
+      console.log("Check callback:", status);
+      if(status)
+      {
+        res.send('Client already exists!');
+        // res.render('adminstart');
+      }
+      else
+      {
         console.log('Adding client: ' + JSON.stringify(client));
         db.collection('clients', function(err, collection) {
             collection.insert(client, {safe:true}, function(err, result) {
@@ -80,19 +78,20 @@ router.addClient = function(req, res) {
             });
         });
     }
-  }
+  });
+}
 
-function check(clname)
+function check(clname, callback)
 {
 collection.find({name : clname}).toArray(function (err, result) {
           if (err) {
             console.log(err);
           } else if (result.length) {
             console.log("true");
-            return true;
+            callback(true);
           } else {
             console.log("false");
-            return false;
+            callback(false);
           }
         });
 }
@@ -113,7 +112,6 @@ router.updateClient = function(req, res) {
     });
 }
 
-var collection = db.collection('clients');
 router.searchClient = function(req, res) {
    var s = {};
   if (req.body.name !== "")
@@ -193,21 +191,20 @@ router.searchClient = function(req, res) {
             info: info,
         }, function (err, HTML) {
           console.log(info);
-            pdf.create(HTML, options).toFile('./downloads/employee.pdf', function (err, result) {
-              console.log(HTML);
-                if (err) {
-                    return res.status(400).send({
-                        message: errorHandler.getErrorMessage(err)
-                    });
-                }
+            pdf.create(HTML, options).toFile('./downloads/employee.pdf', function(err, result) {
+            if(err){
+              return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
             });
-            fs.readFile('./downloads/employee.pdf',function(err,data) {
-              res.contentType("application/pdf");
-              res.send(data);
+            }
+            fs.readFile('./downloads/employee.pdf', function(err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
             });
           });
- }
-      } else {
+ });
+      } 
+    }   else {
         console.log('No document(s) found with defined "find" criteria!');
         res.render('failsearch')
       }
