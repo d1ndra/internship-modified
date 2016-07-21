@@ -1,28 +1,35 @@
-<html ng-app="test">
+<html ng-app="postExample">
 <title>Search</title>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>  
+<script src="C:/Users/Mahe/backend test/test/public/javascripts/usersController.js"></script>
+    <script src="C:/Users/Mahe/backend test/test/public/javascripts/userRepoService.js"></script>
   <!-- <script>  
  var app = angular.module('user', []);  
  app.controller('ctrlName', function($scope) {  
   $scope.names = ['Flipkart','Amazon','SAP','Oracle','Panasonic','HP','Apple','Test','Sample'];  
  });  
    </script>-->
-   <script type="text/javascript">
-       angular.module('test', []).controller('DemoCtrl', function ($scope, $http) {
-    $scope.selectedTestAccount = null;
-    $scope.clients = [];
-
-    $http({
-            method: 'GET',
-            url: '/admin/getclients',
-            data: { applicationId: 3 }
-        }).success(function (result) {
-        $scope.clients = result;
-    });
+   <!--<script type="text/javascript">
+       // Wrapper function to retrieve a product
+// from the server, keyed on productId.
+apiProduct.lookup(productId, function(product) {
+    $scope.product = product;
+ 
+    // Replace the server-supplied lookup value
+    // with the matching value
+    // in the $scope.units array.
+    $scope.product.uom = lookup_by_code(product.uom.name, $scope.clients);
 });
-
-   </script>
-    <body ng-app="user" style="text-align:center;" ng-controller="DemoCtrl"> 
+ 
+function lookup_by_code(code, data) {
+    for(var i=0; i
+        if(data[i].name == name)
+            return data[i];
+ 
+    return null;
+};
+   </script>-->
+    <body ng-app="user" style="text-align:center;" ng-controller="UsersController"> 
  <h1>Search</h1>
     <form method="POST" action="/admin/searchclient">
     <table id="abc" style="width:100%">
@@ -31,9 +38,9 @@
     <td>
     <!--<div class="sample" ng-controller="ctrlName">-->
     Client/Account Name:       
-    <select name="selectedTestAccount" ng-model="selectedTestAccount">
-         <option ng:repeat="client in clients" value="{{client.name}}">{{client.name}}</option>
-     </select>  
+    <select id="UserSelector" style="width: 100%;">
+      <option ng-repeat="user in users" value="{{user.name}}">{{user.name}}</option>
+    </select>
     <!--</div>   -->
     </td>
     <td>
